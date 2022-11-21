@@ -27,14 +27,11 @@ const TREE_DATA = {
     'Almond Meal flour': null,
     'Organic eggs': null,
     'Protein Powder': null,
-    Fruits: {
-      Apple: null,
-      Berries: ['Blueberry', 'Raspberry'],
-      Orange: null,
-    },
   },
   Reminders: ['Cook dinner', 'Read the Material Design spec', 'Upgrade Application to Angular'],
 };
+
+
 
 /**
  * Checklist database, it can build a tree structured Json object.
@@ -56,6 +53,9 @@ export class ChecklistDatabase {
   initialize() {
     // Build the tree nodes from Json object. The result is a list of `TodoItemNode` with nested
     //     file node as children.
+
+    
+
     const data = this.buildFileTree(TREE_DATA, 0);
 
     // Notify the change.
@@ -248,18 +248,5 @@ export class TreeChecklistExample {
       }
     }
     return null;
-  }
-
-  /** Select the category so we can insert the new item. */
-  addNewItem(node: TodoItemFlatNode) {
-    const parentNode = this.flatNodeMap.get(node);
-    this._database.insertItem(parentNode!, '');
-    this.treeControl.expand(node);
-  }
-
-  /** Save the node to database */
-  saveNode(node: TodoItemFlatNode, itemValue: string) {
-    const nestedNode = this.flatNodeMap.get(node);
-    this._database.updateItem(nestedNode!, itemValue);
   }
 }
