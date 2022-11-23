@@ -3,6 +3,28 @@ import {FlatTreeControl} from '@angular/cdk/tree';
 import {Component, Injectable} from '@angular/core';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {BehaviorSubject} from 'rxjs';
+import { Observable } from 'rxjs';
+
+import { HttpClient } from '@angular/common/http';
+import { setupTestingRouterInternal } from '@angular/router/testing';
+
+const TREE_DATA: any = {
+
+  "areas": [
+      {
+          "id": "1620",
+          "parent_id": "113",
+          "name": "Республика Марий Эл",
+          "areas": []
+      },
+      {
+          "id": "1624",
+          "parent_id": "113",
+          "name": "Республика Татарстан",
+          "areas": []
+      }
+  ]
+};
 
 /**
  * Node for to-do item
@@ -19,44 +41,84 @@ export class TodoItemFlatNode {
   expandable!: boolean;
 }
 
-/**
- * The Json object for to-do list data.
- */
-const TREE_DATA = {
-  Groceries: {
-    'Almond Meal flour': null,
-    'Organic eggs': null,
-    'Protein Powder': null,
-  },
-  Reminders: ['Cook dinner', 'Read the Material Design spec', 'Upgrade Application to Angular'],
-};
-
-
 
 /**
  * Checklist database, it can build a tree structured Json object.
  * Each node in Json object represents a to-do item or a category.
  * If a node is a category, it has children items and new items can be added under the category.
  */
+
+interface IArea{
+  
+}
+
+ class AreaCity {
+  name: string;
+  id:string;
+  parentId: string;
+
+  constructor(name: string, id: string, parentId: string){
+    this.name = name;
+    this.id = id;
+    this.parentId = parentId;
+  }
+
+}
+
+class AreaRegion extends AreaCity 
+{
+  child: AreaCity;
+  constructor(name: string, id: string, parentId: string, child: AreaCity){
+    super(name, id, parentId);
+    this.child = child;
+
+  }
+
+}
+
+const areaCity = new AreaCity('ART', '2', '1');
+
+const areaRegion = new AreaRegion('EKB', '1', '0', areaCity);
+
+console.log(areaCity.name, areaRegion.name);
+
 @Injectable()
 export class ChecklistDatabase {
   dataChange = new BehaviorSubject<TodoItemNode[]>([]);
+
+  tree_data: any = TREE_DATA;
+
+
+  
+
+  pasrseAreas()
+  {
+
+  }
+
+  get()
+  {
+    this.http.get('https://api.hh.ru/areas/113').subscribe(response => {
+      this.tree_data = response;
+      this.initialize();
+    })
+
+  }
+
+  constructor(private http: HttpClient) {
+    this.get();
+    this.initialize();
+  }
 
   get data(): TodoItemNode[] {
     return this.dataChange.value;
   }
 
-  constructor() {
-    this.initialize();
-  }
-
-  initialize() {
+ initialize() {
     // Build the tree nodes from Json object. The result is a list of `TodoItemNode` with nested
     //     file node as children.
-
-    
-
-    const data = this.buildFileTree(TREE_DATA, 0);
+      console.log(this.tree_data);
+      const data = this.buildFileTree(this.tree_data, 0);
 
     // Notify the change.
     this.dataChange.next(data);

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { HttpClientModule }   from '@angular/common/http';
 
 import {MatTreeModule} from '@angular/material/tree';
 import {TreeChecklistExample} from './components/material-tree/tree-checklist-example';
@@ -12,7 +12,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
-// import {TreeChecklistExample} from './components/material-tree/tree-checklist-example';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +27,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     ReactiveFormsModule,
     MatCheckboxModule,
     MatIconModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [
