@@ -55,30 +55,29 @@ interface IArea{
  class AreaCity {
   name: string;
   id:string;
-  parentId: string;
+  parent_id: string;
 
   constructor(name: string, id: string, parentId: string){
     this.name = name;
     this.id = id;
-    this.parentId = parentId;
+    this.parent_id = parentId;
   }
 
 }
 
 class AreaRegion extends AreaCity 
 {
-  child: AreaCity;
-  constructor(name: string, id: string, parentId: string, child: AreaCity){
+  areas: Array<AreaCity>;
+  constructor(name: string, id: string, parentId: string, areas: Array<AreaCity>){
     super(name, id, parentId);
-    this.child = child;
-
+    this.areas = areas;
   }
 
 }
 
 const areaCity = new AreaCity('ART', '2', '1');
 
-const areaRegion = new AreaRegion('EKB', '1', '0', areaCity);
+const areaRegion = new AreaRegion('EKB', '1', '0', [areaCity]);
 
 console.log(areaCity.name, areaRegion.name);
 
@@ -98,8 +97,14 @@ export class ChecklistDatabase {
 
   get()
   {
-    this.http.get('https://api.hh.ru/areas/113').subscribe(response => {
-      this.tree_data = response;
+    this.http.get<AreaRegion>('https://api.hh.ru/areas/113').subscribe(response => {
+      this.tree_data = response.areas;
+
+
+
+      console.log( response.areas );
+      console.log( typeof(response) );
+
       this.initialize();
     })
 
@@ -117,8 +122,8 @@ export class ChecklistDatabase {
  initialize() {
     // Build the tree nodes from Json object. The result is a list of `TodoItemNode` with nested
     //     file node as children.
-      console.log(this.tree_data);
-      const data = this.buildFileTree(this.tree_data, 0);
+      // console.log(this.tree_data);
+    const data = this.buildFileTree(this.tree_data, 0);
 
     // Notify the change.
     this.dataChange.next(data);
