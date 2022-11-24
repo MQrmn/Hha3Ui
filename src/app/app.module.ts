@@ -5,19 +5,21 @@ import { AppComponent } from './app.component';
 import { HttpClientModule }   from '@angular/common/http';
 
 import {MatTreeModule} from '@angular/material/tree';
-import {TreeChecklistExample} from './components/material-tree/tree-checklist-example';
+import {TreeChecklistExample} from './components/hha-areas-tree/hha-areas-tree';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
+import {HhaHeader} from './components/header/hha-header';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    TreeChecklistExample
+    TreeChecklistExample,
+    HhaHeader
   ],
   imports: [
     BrowserModule,

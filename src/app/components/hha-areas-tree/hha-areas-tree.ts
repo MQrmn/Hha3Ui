@@ -56,8 +56,6 @@ export class TodoItemFlatNode {
   expandable!: boolean;
 }
 
-
-
 @Injectable()
 export class ChecklistDatabase {
   dataChange = new BehaviorSubject<TodoItemNode[]>([]);
@@ -99,9 +97,7 @@ export class ChecklistDatabase {
       
       if (value != null) {
         if (typeof value === 'object') {
-          if (value.areas != undefined || null){
-            node.children = this.buildFileTree(value.areas, level + 1);
-          }
+          if (value.areas != undefined || null) node.children = this.buildFileTree(value.areas, level + 1);
         } else {
           node.item = obj[key].name;
         }
@@ -112,7 +108,6 @@ export class ChecklistDatabase {
     }, []);
   }
 
-
   updateItem(node: TodoItemNode, name: string) {
     node.item = name;
     this.dataChange.next(this.data);
@@ -120,8 +115,8 @@ export class ChecklistDatabase {
 }
 
 @Component({
-  selector: 'tree-checklist-example',
-  templateUrl: 'tree-checklist-example.html',
+  selector: 'hha-areas-tree',
+  templateUrl: 'hha-areas-tree.html',
   providers: [ChecklistDatabase],
 })
 export class TreeChecklistExample {
