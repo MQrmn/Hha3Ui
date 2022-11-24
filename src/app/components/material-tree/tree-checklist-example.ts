@@ -3,10 +3,8 @@ import {FlatTreeControl} from '@angular/cdk/tree';
 import {Component, Injectable} from '@angular/core';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
 import {BehaviorSubject} from 'rxjs';
-import { Observable } from 'rxjs';
-
 import { HttpClient } from '@angular/common/http';
-import { setupTestingRouterInternal } from '@angular/router/testing';
+
 
 const TREE_DATA: any = {
 
@@ -26,85 +24,50 @@ const TREE_DATA: any = {
   ]
 };
 
-/**
- * Node for to-do item
- */
+
+class Area {
+  name: string;
+  id:string;
+  parent_id: string;
+  areas?: Array<Area>;
+
+  constructor(name: string, id: string, parentId: string, areas: Array<Area>){
+    this.name = name;
+    this.id = id;
+    this.parent_id = parentId;
+    this.areas = areas;
+}
+}
+
 export class TodoItemNode {
+  name!: string;
+  id!:string;
+  parent_id!: string;
   children!: TodoItemNode[];
   item!: string;
 }
 
-/** Flat to-do item node with expandable and level information */
 export class TodoItemFlatNode {
+  name!: string;
+  id!:string;
+  parent_id!: string;
   item!: string;
   level!: number;
   expandable!: boolean;
 }
 
 
-/**
- * Checklist database, it can build a tree structured Json object.
- * Each node in Json object represents a to-do item or a category.
- * If a node is a category, it has children items and new items can be added under the category.
- */
-
-interface IArea{
-  
-}
-
- class AreaCity {
-  name: string;
-  id:string;
-  parent_id: string;
-
-  constructor(name: string, id: string, parentId: string){
-    this.name = name;
-    this.id = id;
-    this.parent_id = parentId;
-  }
-
-}
-
-class AreaRegion extends AreaCity 
-{
-  areas: Array<AreaCity>;
-  constructor(name: string, id: string, parentId: string, areas: Array<AreaCity>){
-    super(name, id, parentId);
-    this.areas = areas;
-  }
-
-}
-
-const areaCity = new AreaCity('ART', '2', '1');
-
-const areaRegion = new AreaRegion('EKB', '1', '0', [areaCity]);
-
-console.log(areaCity.name, areaRegion.name);
 
 @Injectable()
 export class ChecklistDatabase {
   dataChange = new BehaviorSubject<TodoItemNode[]>([]);
-
   tree_data: any = TREE_DATA;
-
-
-  
-
-  pasrseAreas()
-  {
-
-  }
 
   get()
   {
-    this.http.get<AreaRegion>('https://api.hh.ru/areas/113').subscribe(response => {
+    this.http.get<Area>('https://api.hh.ru/areas/113').subscribe(response => {
       this.tree_data = response.areas;
-
-
-
-      console.log( response.areas );
-      console.log( typeof(response) );
-
+      // console.log(this.tree_data);
       this.initialize();
     })
 
@@ -120,44 +83,35 @@ export class ChecklistDatabase {
   }
 
  initialize() {
-    // Build the tree nodes from Json object. The result is a list of `TodoItemNode` with nested
-    //     file node as children.
-      // console.log(this.tree_data);
     const data = this.buildFileTree(this.tree_data, 0);
-
-    // Notify the change.
+    console.log(data);
     this.dataChange.next(data);
   }
 
-  /**
-   * Build the file structure tree. The `value` is the Json object, or a sub-tree of a Json object.
-   * The return value is the list of `TodoItemNode`.
-   */
+
   buildFileTree(obj: {[key: string]: any}, level: number): TodoItemNode[] {
+    
     return Object.keys(obj).reduce<TodoItemNode[]>((accumulator, key) => {
       const value = obj[key];
-      const node = new TodoItemNode();
-      node.item = key;
 
+      const node = new TodoItemNode();
+      node.item = obj[key].name;
+      
       if (value != null) {
         if (typeof value === 'object') {
-          node.children = this.buildFileTree(value, level + 1);
+          if (value.areas != undefined || null){
+            node.children = this.buildFileTree(value.areas, level + 1);
+          }
         } else {
-          node.item = value;
+          node.item = obj[key].name;
         }
       }
-
+      
       return accumulator.concat(node);
+      
     }, []);
   }
 
-  /** Add an item to to-do list */
-  insertItem(parent: TodoItemNode, name: string) {
-    if (parent.children) {
-      parent.children.push({item: name} as TodoItemNode);
-      this.dataChange.next(this.data);
-    }
-  }
 
   updateItem(node: TodoItemNode, name: string) {
     node.item = name;
@@ -165,9 +119,6 @@ export class ChecklistDatabase {
   }
 }
 
-/**
- * @title Tree with checkboxes
- */
 @Component({
   selector: 'tree-checklist-example',
   templateUrl: 'tree-checklist-example.html',
