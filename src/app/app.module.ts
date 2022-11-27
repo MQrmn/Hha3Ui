@@ -11,14 +11,20 @@ import {MatTreeModule} from '@angular/material/tree';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatInputModule} from '@angular/material/input';
 
 // HHa Components
 import {AppHeaderComponent} from './components/header/header.component';
-import {AppSearchPanelComponent} from './components/search-settings-panel/search-panel.component';
-import {TreeChecklistExample} from './components/hha-areas-tree/hha-areas-tree';
+import {AppSearchPanelComponent} from './components/search-panel/search-panel.component';
+import {TreeChecklistExample} from './components/areas-tree/areas-tree.component';
 import {AppResultPanelComponent} from './components/result-panel/result-panel';
 import {AppFooterComponent} from './components/footer/footer';
-import {AppSearchFormComponent} from './components/search-form/search-form.component';
+import {AppSearchFormComponent} from './components/search-vacancy-form/search-vacancy-form.component';
+import { AppSearchExpansionPanelComponent } from './components/search-expansion-panel/search-expansion-panel.component';
+import { SearchCityFormComponent } from './components/search-city-form/search-city-form.component';
 
 
 @NgModule({
@@ -30,6 +36,8 @@ import {AppSearchFormComponent} from './components/search-form/search-form.compo
     AppFooterComponent,
     AppSearchPanelComponent,
     AppSearchFormComponent,
+    AppSearchExpansionPanelComponent,
+    SearchCityFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +49,10 @@ import {AppSearchFormComponent} from './components/search-form/search-form.compo
     MatIconModule,
     MatFormFieldModule,
     HttpClientModule,
+    MatExpansionModule,
+    BrowserAnimationsModule,
+    MatNativeDateModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [

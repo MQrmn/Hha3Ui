@@ -115,8 +115,9 @@ export class ChecklistDatabase {
 }
 
 @Component({
-  selector: 'hha-areas-tree',
-  templateUrl: 'hha-areas-tree.html',
+  selector: 'app-areas-tree',
+  templateUrl: 'areas-tree.component.html',
+  styleUrls:['areas-tree.component.scss',],
   providers: [ChecklistDatabase],
 })
 export class TreeChecklistExample {

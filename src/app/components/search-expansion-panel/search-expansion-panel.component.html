@@ -1,0 +1,89 @@
+
+
+<div class="example-action-buttons">
+  <button mat-button (click)="accordion.openAll()">Expand All</button>
+  <button mat-button (click)="accordion.closeAll()">Collapse All</button>
+</div>
+
+<mat-accordion class="example-headers-align" multi>
+
+<!-- Выбор региона -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title class="app-expansion-panel-header-title">
+        Регион
+      </mat-panel-title>
+      <app-search-city-form></app-search-city-form>      
+    </mat-expansion-panel-header>
+
+      <app-areas-tree></app-areas-tree>
+    
+  </mat-expansion-panel>
+
+<!-- Выбор периода -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Период
+      </mat-panel-title>
+      <mat-panel-description>
+        Период публикации вакансии
+        <mat-icon>date_range</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+
+  <!-- Выбор уровня дохода-->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Уровень дохода
+      </mat-panel-title>
+      <mat-panel-description>
+        Уровень дохода
+        <mat-icon>date_range</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+
+  <!-- Выбор типа занятости-->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Тип занятости
+      </mat-panel-title>
+      <mat-panel-description>
+        Тип занятости
+        <mat-icon>date_range</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+  
+  <!-- Выбор графика работы-->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        График работы
+      </mat-panel-title>
+      <mat-panel-description>
+        График работы
+        <mat-icon>date_range</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+    
+  <!-- Настройки результатов поиска-->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Настройки результатов
+      </mat-panel-title>
+      <mat-panel-description>
+        Настройки результатов поиска
+        <mat-icon>date_range</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+  </mat-expansion-panel>
+
+
+</mat-accordion>
