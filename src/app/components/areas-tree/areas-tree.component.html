@@ -3,18 +3,18 @@
     <button mat-icon-button disabled></button>
     <mat-checkbox class=""
                   [checked]="checklistSelection.isSelected(node)"
-                  (change)="todoLeafItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+                  (change)="areaLeafItemSelectionToggle(node)">{{node.name}}</mat-checkbox>
   </mat-tree-node>
 
   <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
     <button mat-icon-button matTreeNodeToggle
-            [attr.aria-label]="'Toggle ' + node.item">
+            [attr.aria-label]="'Toggle ' + node.name">
       <mat-icon class="">
         {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
       </mat-icon>
     </button>
     <mat-checkbox [checked]="descendantsAllSelected(node)"
                   [indeterminate]="descendantsPartiallySelected(node)"
-                  (change)="todoItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+                  (change)="areaItemSelectionToggle(node)">{{node.name}}</mat-checkbox>
   </mat-tree-node>
 </mat-tree>

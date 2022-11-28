@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule }   from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -23,8 +22,8 @@ import {TreeChecklistExample} from './components/areas-tree/areas-tree.component
 import {AppResultPanelComponent} from './components/result-panel/result-panel';
 import {AppFooterComponent} from './components/footer/footer';
 import {AppSearchFormComponent} from './components/search-vacancy-form/search-vacancy-form.component';
-import { AppSearchExpansionPanelComponent } from './components/search-expansion-panel/search-expansion-panel.component';
-import { SearchCityFormComponent } from './components/search-city-form/search-city-form.component';
+import {AppSearchExpansionPanelComponent } from './components/search-expansion-panel/search-expansion-panel.component';
+import {SearchCityFormComponent } from './components/search-city-form/search-city-form.component';
 
 
 @NgModule({
@@ -55,9 +54,6 @@ import { SearchCityFormComponent } from './components/search-city-form/search-ci
     MatInputModule
   ],
   providers: [],
-  bootstrap: [
-    AppComponent,
-    TreeChecklistExample
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

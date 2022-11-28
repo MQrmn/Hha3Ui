@@ -1,11 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
-import {MatAccordion} from '@angular/material/expansion';
+import {MatAccordion, MatAccordionDisplayMode} from '@angular/material/expansion';
 
 @Component({
   selector: 'app-search-expansion-panel',
   templateUrl: './search-expansion-panel.component.html',
-  styleUrls: ['./search-expansion-panel.component.scss']
+  styleUrls: ['./search-expansion-panel.component.scss'] 
 })
 export class AppSearchExpansionPanelComponent {
+  
   @ViewChild(MatAccordion) accordion!: MatAccordion;
+  matAccordionDisplayMode: MatAccordionDisplayMode = "flat";
 }

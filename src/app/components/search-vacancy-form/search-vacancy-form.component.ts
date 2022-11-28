@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./search-vacancy-form.component.scss']
 })
 export class AppSearchFormComponent {
-
+  vacancyName: string = 'Junior C# Developer'
 }

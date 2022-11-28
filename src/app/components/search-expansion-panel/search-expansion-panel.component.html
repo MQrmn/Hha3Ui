@@ -1,24 +1,52 @@
 
-
-<div class="example-action-buttons">
-  <button mat-button (click)="accordion.openAll()">Expand All</button>
-  <button mat-button (click)="accordion.closeAll()">Collapse All</button>
-</div>
-
-<mat-accordion class="example-headers-align" multi>
+<mat-accordion  [displayMode]="matAccordionDisplayMode" 
+                [multi]="true" 
+                #accordion="matAccordion"
+                class="example-headers-align" 
+                >
 
 <!-- Выбор региона -->
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
+  <mat-expansion-panel class="app-expansion-panel">
+    <mat-expansion-panel-header class="app-expansion-panel-header">
       <mat-panel-title class="app-expansion-panel-header-title">
         Регион
       </mat-panel-title>
-      <app-search-city-form></app-search-city-form>      
+      <mat-panel-description>
+        Регион
+        <mat-icon>date_range</mat-icon>
+      </mat-panel-description>
+      <!-- <app-search-city-form></app-search-city-form>       -->
     </mat-expansion-panel-header>
 
       <app-areas-tree></app-areas-tree>
     
   </mat-expansion-panel>
+
+<!-- Специализация -->
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Специализация
+    </mat-panel-title>
+    <mat-panel-description>
+      Специализация
+      <mat-icon>date_range</mat-icon>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+</mat-expansion-panel>
+
+<!-- Отрасль -->
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Отрасль
+    </mat-panel-title>
+    <mat-panel-description>
+      Отрасль компании
+      <mat-icon>date_range</mat-icon>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+</mat-expansion-panel>
 
 <!-- Выбор периода -->
   <mat-expansion-panel>
@@ -37,7 +65,7 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Уровень дохода
+        Доход
       </mat-panel-title>
       <mat-panel-description>
         Уровень дохода
@@ -50,7 +78,8 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Тип занятости
+        Тип 
+        занятости
       </mat-panel-title>
       <mat-panel-description>
         Тип занятости
@@ -63,7 +92,7 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        График работы
+        График
       </mat-panel-title>
       <mat-panel-description>
         График работы
