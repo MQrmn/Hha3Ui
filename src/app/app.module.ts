@@ -14,6 +14,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
 
 // HHa Components
 import {AppHeaderComponent} from './components/header/header.component';
@@ -26,7 +27,8 @@ import {AppSearchExpansionPanelComponent } from './components/search-expansion-p
 import {SearchCityFormComponent } from './components/search-city-form/search-city-form.component';
 
 // Services
-import {SearchRequestDataService} from './services/search-request-data/search-request-data.service'
+import {SearchRequestDataService} from './services/search-request-data/search-request-data.service';
+import { SearchAndCanselButtonsComponent } from './components/search-and-cansel-buttons/search-and-cansel-buttons.component'
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import {SearchRequestDataService} from './services/search-request-data/search-re
     AppSearchFormComponent,
     AppSearchExpansionPanelComponent,
     SearchCityFormComponent,
+    SearchAndCanselButtonsComponent,
     // SearchRequestDataService
 
   ],
@@ -55,7 +58,8 @@ import {SearchRequestDataService} from './services/search-request-data/search-re
     MatExpansionModule,
     BrowserAnimationsModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule
   ],
   providers: [
     SearchRequestDataService
