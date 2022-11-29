@@ -25,6 +25,8 @@ import {AppSearchFormComponent} from './components/search-vacancy-form/search-va
 import {AppSearchExpansionPanelComponent } from './components/search-expansion-panel/search-expansion-panel.component';
 import {SearchCityFormComponent } from './components/search-city-form/search-city-form.component';
 
+// Services
+import {SearchRequestData} from './services/search-request-data/search-request-data.service'
 
 @NgModule({
   declarations: [
@@ -36,7 +38,7 @@ import {SearchCityFormComponent } from './components/search-city-form/search-cit
     AppSearchPanelComponent,
     AppSearchFormComponent,
     AppSearchExpansionPanelComponent,
-    SearchCityFormComponent,
+    SearchCityFormComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,9 @@ import {SearchCityFormComponent } from './components/search-city-form/search-cit
     MatNativeDateModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [
+    SearchRequestData
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
