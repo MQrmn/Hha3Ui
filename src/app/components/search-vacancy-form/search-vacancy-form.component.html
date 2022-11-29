@@ -4,6 +4,8 @@
       <input matInput [(ngModel)]="vacancyName" 
                       placeholder="Введите имя вакансии" 
                       [ngModelOptions]="{standalone: true}"
+                      (click) = "testLog()"
+                      (input)="changeServiceValue()"
                       >
     </mat-form-field>
 </form>

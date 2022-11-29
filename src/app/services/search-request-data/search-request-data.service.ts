@@ -1,4 +1,4 @@
-export class SearchRequestData {
+export class SearchRequestDataService {
     SelectedAreas: string[] = [];
     SearchPhrase: string = '';
   }

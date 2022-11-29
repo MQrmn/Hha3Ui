@@ -6,7 +6,7 @@ import {BehaviorSubject} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import { Area } from 'src/app/models/area/area.model';
 import { AreaItemNode, AreaItemFlatNode } from 'src/app/models/todo-item-node/todo-item-node.model';
-
+import {SearchRequestDataService} from '../../services/search-request-data/search-request-data.service';
 
 var areasTree: any = {};
 
@@ -73,7 +73,7 @@ export class ChecklistDatabase {
 export class TreeChecklistExample {
 
   rootParentId!: string;
-  selectedAreas!: any[];
+  selectedAreas!: string[];
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<AreaItemFlatNode, AreaItemNode>();
 
@@ -95,13 +95,16 @@ export class TreeChecklistExample {
   /** The selection for checklist */
   checklistSelection = new SelectionModel<AreaItemFlatNode>(true /* multiple */);
 
-  constructor(private _database: ChecklistDatabase) {
+  constructor(private _database: ChecklistDatabase, private _searchRequestDataService: SearchRequestDataService) {
+    
     this.treeFlattener = new MatTreeFlattener(
+      
       this.transformer,
       this.getLevel,
       this.isExpandable,
       this.getChildren,
     );
+
     this.treeControl = new FlatTreeControl<AreaItemFlatNode>(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
@@ -110,6 +113,7 @@ export class TreeChecklistExample {
     });
   }
 
+  
   getLevel = (node: AreaItemFlatNode) => node.level;
 
   isExpandable = (node: AreaItemFlatNode) => node.expandable;
@@ -177,8 +181,8 @@ export class TreeChecklistExample {
 
   // Check node for existing & add to array
   addAreaToSelected(areaId: string): void {
-    if (!this.selectedAreas.includes(areaId)){ 
-      this.selectedAreas.push(areaId);
+    if (!this._searchRequestDataService.SelectedAreas.includes(areaId)){ 
+      this._searchRequestDataService.SelectedAreas.push(areaId);
     }
   }
 
@@ -187,13 +191,13 @@ export class TreeChecklistExample {
   prepareSelectedAreas(): void {
     
     this.rootParentId = areasTree[0].parent_id;
-    this.selectedAreas = [];
+    this._searchRequestDataService.SelectedAreas = [];
 
     for (var area of this.checklistSelection.selected){
       if (area.parent_id == this.rootParentId){           // Check for parents node
         this.addAreaToSelected(area.id);
       }
-      if (!this.selectedAreas.includes(area.parent_id)) { // Check parent existing
+      if (!this._searchRequestDataService.SelectedAreas.includes(area.parent_id)) { // Check parent existing
         this.addAreaToSelected(area.id);
       }
     }
