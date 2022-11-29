@@ -8,15 +8,17 @@ import { Area } from 'src/app/models/area/area.model';
 import { AreaItemNode, AreaItemFlatNode } from 'src/app/models/todo-item-node/todo-item-node.model';
 
 
+var areasTree: any = {};
+
 @Injectable()
 export class ChecklistDatabase {
   dataChange = new BehaviorSubject<AreaItemNode[]>([]);
-  areasTree: any = {};
+  
 
   get()
   {
     this.http.get<Area>('https://api.hh.ru/areas/113').subscribe(response => {
-      this.areasTree = response.areas;
+      areasTree = response.areas;
       this.initialize();
     })
   }
@@ -31,7 +33,7 @@ export class ChecklistDatabase {
   }
 
  initialize() {
-    const data = this.buildFileTree(this.areasTree, 0);
+    const data = this.buildFileTree(areasTree, 0);
     this.dataChange.next(data);
   }
 
@@ -69,6 +71,9 @@ export class ChecklistDatabase {
   providers: [ChecklistDatabase],
 })
 export class TreeChecklistExample {
+
+  rootParentId!: string;
+  selectedAreas!: any[];
   /** Map from flat node to nested node. This helps us finding the nested node to be modified */
   flatNodeMap = new Map<AreaItemFlatNode, AreaItemNode>();
 
@@ -171,7 +176,26 @@ export class TreeChecklistExample {
   }
 
   prepareSelectedAreas(){
+    
+    this.rootParentId = areasTree[0].parent_id;
+    this.selectedAreas = [];
+
     console.log(this.checklistSelection.selected);
+
+    for (var area of this.checklistSelection.selected){
+
+      if (area.parent_id == this.rootParentId){
+
+        if (!this.selectedAreas.includes(area.id)){
+          this.selectedAreas.push(area.id);
+      }
+      }
+
+      
+      
+    }
+
+    console.log(this.selectedAreas);
 
   }
 
