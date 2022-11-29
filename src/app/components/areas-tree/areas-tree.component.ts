@@ -175,28 +175,28 @@ export class TreeChecklistExample {
     this.prepareSelectedAreas();
   }
 
-  prepareSelectedAreas(){
+  // Check node for existing & add to array
+  addAreaToSelected(areaId: string): void {
+    if (!this.selectedAreas.includes(areaId)){ 
+      this.selectedAreas.push(areaId);
+    }
+  }
+
+  // Preparing selected areas array before sending 
+  // search requests
+  prepareSelectedAreas(): void {
     
     this.rootParentId = areasTree[0].parent_id;
     this.selectedAreas = [];
 
-    console.log(this.checklistSelection.selected);
-
     for (var area of this.checklistSelection.selected){
-
-      if (area.parent_id == this.rootParentId){
-
-        if (!this.selectedAreas.includes(area.id)){
-          this.selectedAreas.push(area.id);
+      if (area.parent_id == this.rootParentId){           // Check for parents node
+        this.addAreaToSelected(area.id);
       }
+      if (!this.selectedAreas.includes(area.parent_id)) { // Check parent existing
+        this.addAreaToSelected(area.id);
       }
-
-      
-      
     }
-
-    console.log(this.selectedAreas);
-
   }
 
   /* Checks all the parents when a leaf node is selected/unselected */
