@@ -7,6 +7,7 @@ import {HttpClient} from '@angular/common/http';
 import { Area } from 'src/app/models/area/area.model';
 import { AreaItemNode, AreaItemFlatNode } from 'src/app/models/todo-item-node/todo-item-node.model';
 import {SearchRequestDataService} from '../../services/search-request-data/search-request-data.service';
+import { HttpService } from 'src/app/services/http/http.service';
 
 var areasTree: any = {};
 
@@ -23,7 +24,7 @@ export class ChecklistDatabase {
     })
   }
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private _httpService: HttpService) {
     this.get();
     this.initialize();
   }
@@ -68,7 +69,9 @@ export class ChecklistDatabase {
   selector: 'app-areas-tree',
   templateUrl: 'areas-tree.component.html',
   styleUrls:['areas-tree.component.scss',],
-  providers: [ChecklistDatabase],
+  providers: [ChecklistDatabase,
+              HttpService
+              ],
 })
 export class TreeChecklistExample {
 
