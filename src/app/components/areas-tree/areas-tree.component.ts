@@ -201,6 +201,10 @@ export class TreeChecklistExample {
         this.addAreaToSelected(area.id);
       }
     }
+
+    if (this._searchRequestDataService.SelectedAreas.length == 0){
+      this.addAreaToSelected("113");
+    }
   }
 
   /* Checks all the parents when a leaf node is selected/unselected */

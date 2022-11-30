@@ -1,4 +1,4 @@
 export class SearchRequestDataService {
-    SelectedAreas: string[] = [];
-    SearchPhrase: string = '';
+    SelectedAreas: string[] = ["113"];
+    SearchPhrase: string = "Junior C# Developer";
   }

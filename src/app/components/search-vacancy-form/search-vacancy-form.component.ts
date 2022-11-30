@@ -7,10 +7,10 @@ import {SearchRequestDataService} from '../../services/search-request-data/searc
   styleUrls: ['./search-vacancy-form.component.scss'],
 })
 export class AppSearchFormComponent {
-  vacancyName: string = "Junior C# Developer";
+  vacancyName: string;
 
   constructor(private _searchRequestDataService: SearchRequestDataService) {
-    this.changeServiceValue();  
+    this.vacancyName = this._searchRequestDataService.SearchPhrase;
   }
 
   changeServiceValue(){
