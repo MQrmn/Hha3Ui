@@ -14,18 +14,17 @@ var areasTree: any = {};
 @Injectable()
 export class ChecklistDatabase {
   dataChange = new BehaviorSubject<AreaItemNode[]>([]);
-  
 
-  get()
-  {
-    this.http.get<Area>('https://api.hh.ru/areas/113').subscribe(response => {
+  getAreasFromApi(){
+
+    this._httpService.get<Area>('https://api.hh.ru/areas/113').subscribe(response => {
       areasTree = response.areas;
       this.initialize();
     })
   }
 
   constructor(private http: HttpClient, private _httpService: HttpService) {
-    this.get();
+    this.getAreasFromApi();
     this.initialize();
   }
 

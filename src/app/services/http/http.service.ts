@@ -6,10 +6,8 @@ export class HttpService {
 
     constructor(private http: HttpClient) {}
 
-    get(uri: string)
+    get<T>(uri: string)
     {
-      this.http.get(uri).subscribe(response => {
-        console.log(response)
-      })
+      return this.http.get<T>(uri);
     }
 }
