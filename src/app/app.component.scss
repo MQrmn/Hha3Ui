@@ -1,7 +1,14 @@
+div{
+    @apply 
+    relative
+    mt-3;
+}
+
 .work-place{
     width: 100%;
     display: inline-block;
 }
+
 
 app-search-panel{
     width: 30%;

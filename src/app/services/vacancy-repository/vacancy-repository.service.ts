@@ -1,33 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../http/http.service';
 import { SearchRequestDataService } from '../search-request-data/search-request-data.service';
-
-class Area {
-  id!: string;
-  name!: string;
-}
-
-class Salary {
-  from!: number;
-  to!: number;
-}
-
-class Shedule {
-  id!: string;
-  name!: string;
-}
-
-class VacancyModel{
-  area!: Area;
-  name!: string;
-  salary!: Salary;
-  schedule!: Shedule;
-  constructor() {}
-}
-
-class VacanciesModel{
-  items!: VacancyModel[];
-}
+import { VacanciesModel } from 'src/app/models/vacancies/vacancies.mobel';
 
 @Injectable()
 export class VacancyRepositoryService{
