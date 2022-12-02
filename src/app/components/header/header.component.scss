@@ -1,12 +1,17 @@
 nav{
-    background-color: skyblue;
-    padding: 10px;
+    background-color: rgb(15, 23, 42);
+    @apply
+    pb-1
+    ;
     ul{
-        float: right;
-        list-style-type: none;
+        @apply
+        float-right
+        ;
         li{
-            display: inline-block;
-            padding: 10px;
+            @apply
+            inline-block
+            p-2
+            ;
         }
     }
 }
