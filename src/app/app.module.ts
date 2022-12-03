@@ -31,6 +31,7 @@ import { HttpService } from './services/http/http.service';
 import { SearchRequestDataService } from './services/search-request-data/search-request-data.service';
 import { SearchAndCanselButtonsComponent } from './components/search-and-cansel-buttons/search-and-cansel-buttons.component'
 import { VacancyRepositoryService } from './services/vacancy-repository/vacancy-repository.service';
+import { ResultCardComponent } from './components/result-card/result-card.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { VacancyRepositoryService } from './services/vacancy-repository/vacancy-
     AppSearchFormComponent,
     AppSearchExpansionPanelComponent,
     SearchCityFormComponent,
-    SearchAndCanselButtonsComponent
+    SearchAndCanselButtonsComponent,
+    ResultCardComponent
   ],
   imports: [
     BrowserModule,
